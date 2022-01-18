@@ -1,7 +1,11 @@
+require('dotenv').config();
+const token = process.env.TOKEN;
+const serverIds = process.env.GUILD_IDS.split(",");
+const clientId = process.env.CLIENT_ID;
+
 const fs = require('fs');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { clientId, guildId, token } = require('./config.json');
 
 const commands = []
 
@@ -28,6 +32,9 @@ const rest = new REST({ version: '9' }).setToken(token);
 // 	.catch(console.error);
 
 // Guild command
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-.then(() => console.log('Successfully registered to guild application commands.'))
-.catch(console.error);
+// MAKE IT ACCEPT MULTIPLE GUILD IDS
+for(id of serverIds){
+	rest.put(Routes.applicationGuildCommands(clientId, id), { body: commands })
+	.then(() => console.log('Successfully registered to guild application commands.'))
+	.catch(console.error);
+}

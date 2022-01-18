@@ -1,17 +1,21 @@
+// Read environment variables
+require('dotenv').config();
+// CLIENT_ID, GUILD_IDS, TOKEN, TOKEN_TELEGRAM, PREFIX, CHAT_IDS, CHANNEL_IDS
+
 // Require the necessary discord.js classes
 const fs = require('fs');
 const path = require('path');
 const download = require('download');
 const { Client, Collection, Intents, Message } = require('discord.js');
-const { token, token_telegram, chat_ids, channel_ids, prefix } = require('./config.json');
 const { Telegraf } = require('telegraf');
 const console = require('console');
 
-const discordChannelIDs = channel_ids.split(','); 
+const prefix = process.env.PREFIX
+const discordChannelIDs = process.env.CHANNEL_IDS.split(",")
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
-const tele = new Telegraf(token_telegram);
+const tele = new Telegraf(process.env.TOKEN_TELEGRAM);
 
 client.commands = new Collection();
 
@@ -70,8 +74,7 @@ client.on('interactionCreate', async interaction => {
 });
 
 // Forwarder
-// tele.hears('ping', (ctx) => ctx.reply('pong'));
-const chatIdsArr = chat_ids.split(',');
+const chatIdsArr = process.env.CHAT_IDS.split(',');
 const downloadPath = `./temp`
 
 function sleep(ms) {
@@ -100,7 +103,7 @@ async function sendToDiscord(file, caption, filename, deleteFiles){
 	}
 	sleep(10000)
 		.then(()=>{deleteFiles(filename)})
-		.then(()=>{"File deleted"})
+		.then(()=>{console.log("File deleted")})
 		.catch(console.log)
 }
 
@@ -182,13 +185,13 @@ tele.on('channel_post', async (ctx) => {
 })
 
 client.on('messageCreate', message => {
-	if (message.content === 'send'){
+	if (message.content === `${prefix}send`){
 		message.channel.send('gaung kontol')
 	}
 })
 
 // Login to Telegram and Discord with your client's token
-client.login(token);
+client.login(process.env.TOKEN);
 tele.launch();
 
 // Enable graceful stop
