@@ -1,4 +1,4 @@
-FROM node:latest-alpine
+FROM node:current-alpine
 
 RUN git clone https://github.com/Archiruz/ArchiBot /root/archibot
 WORKDIR root/archibot/
