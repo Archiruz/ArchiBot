@@ -1,6 +1,6 @@
 FROM node:current-alpine
 
-RUN apk add --no-cache=true git
+RUN apk add --no-cache git
 
 RUN git clone https://github.com/Archiruz/ArchiBot /root/archibot
 WORKDIR root/archibot/
