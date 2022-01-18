@@ -185,8 +185,8 @@ tele.on('channel_post', async (ctx) => {
 })
 
 client.on('messageCreate', message => {
-	if (message.content === `${prefix}send`){
-		message.channel.send('gaung kontol')
+	if (message.content === `${prefix}test`){
+		message.channel.send('test')
 	}
 })
 
