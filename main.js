@@ -195,8 +195,14 @@ client.login(process.env.TOKEN);
 tele.launch();
 
 // Enable graceful stop
-process.once('SIGINT', () => tele.stop('SIGINT'));
-process.once('SIGTERM', () => tele.stop('SIGTERM'));
+process.once('SIGINT', () => {
+	tele.stop('SIGINT')
+	client.destroy()
+});
+process.once('SIGTERM', () => {
+	tele.stop('SIGTERM')
+	client.destroy()
+});
 
 console.log(commandFiles);
 console.log(eventFiles);
