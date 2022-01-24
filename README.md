@@ -7,18 +7,16 @@ npm install
 ```
 
 # Setting up
-config.json
+.env
 
-```json
-{
-    "clientId": "",
-    "guildId":"",
-    "token": "",
-    "token_telegram" : "",
-    "prefix": "",
-    "chat_ids" : "",
-    "channel_ids" : ""
-}
+```
+CLIENT_ID=454756873457578456467
+GUILD_IDS=35683456557585,564575683546,2453677647
+TOKEN=Enter.YourDiscord.TokenHere
+TOKEN_TELEGRAM=Enter:Your-TelegramTokenHere
+PREFIX=cok
+CHAT_IDS=-1003535634524,-100542346246245,-1002456345442
+CHANNEL_IDS=384138050123570
 ```
 
 deploy slash command by
