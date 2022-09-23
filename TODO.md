@@ -1,0 +1,3 @@
+- fix deploy and delete commands
+- add some license stuff
+- run test on forwarder again
