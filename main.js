@@ -6,15 +6,17 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const download = require('download');
-const { Client, Collection, Intents, Message } = require('discord.js');
+const { Client, Collection, GatewayIntentBits} = require('discord.js');
 const { Telegraf } = require('telegraf');
 const console = require('console');
 
+// Declare variables from ENV
 const prefix = process.env.PREFIX
 const discordChannelIDs = process.env.CHANNEL_IDS.split(",")
+const invLinks = process.env.INVITE_LINKS
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 const tele = new Telegraf(process.env.TOKEN_TELEGRAM);
 
 client.commands = new Collection();
@@ -85,6 +87,7 @@ async function sendToDiscord(file, caption, filename, deleteFiles){
 	if (!caption)
 	for(const id of discordChannelIDs) {
 		client.channels.cache.get(id).send({
+			content: `<${invLinks}>`,
 			files:[file]
 		})
 		.then(console.log(`Sent message to ${client.channels.cache.get(id).name}`))
@@ -94,7 +97,7 @@ async function sendToDiscord(file, caption, filename, deleteFiles){
 		for(const id of discordChannelIDs) {
 			text = caption.match(/(.+)/)[1]
 			client.channels.cache.get(id).send({
-				content:text,
+				content:text + `\n\n<${invLinks}>`,
 				files:[file]
 			})
 			.then(console.log(`Sent message to ${client.channels.cache.get(id).name}`))

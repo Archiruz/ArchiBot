@@ -4,23 +4,21 @@
   "description": "archibot package",
   "main": "main.js",
   "scripts": {
-    "start": "node ." 
+    "start": "node ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Archiruz/ArchiBot.git"
   },
   "author": "archiruz",
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/Archiruz/ArchiBot/issues"
   },
   "homepage": "https://github.com/Archiruz/ArchiBot#readme",
   "dependencies": {
-    "@discordjs/builders": "^0.11.0",
-    "@discordjs/rest": "^0.2.0-canary.0",
     "discord-api-types": "^0.26.1",
-    "discord.js": "^13.5.1",
+    "discord.js": "^14.4.0",
     "dotenv": "^14.1.0",
     "download": "^8.0.0",
     "telegraf": "^4.5.2"

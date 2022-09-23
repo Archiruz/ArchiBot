@@ -4,11 +4,9 @@ const serverIds = process.env.GUILD_IDS.split(",");
 const clientId = process.env.CLIENT_ID;
 
 const fs = require('fs');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { REST, Routes } = require('discord.js');
 
 const commands = []
-
 const commandFolder = './commands';
 const commandFiles = fs.readdirSync(commandFolder, (err, files) => {
 	if (err) console.error(err);
@@ -24,7 +22,7 @@ for (const file of commandFiles){
 	commands.push(command.data.toJSON());
 }
 
-const rest = new REST({ version: '9' }).setToken(token);
+const rest = new REST({ version: '10' }).setToken(token);
 
 // Global command
 // rest.put(Routes.applicationCommands(clientId), { body: commands })
