@@ -25,14 +25,14 @@ for (const file of commandFiles){
 const rest = new REST({ version: '10' }).setToken(token);
 
 // Global command
-// rest.put(Routes.applicationCommands(clientId), { body: commands })
-// 	.then(() => console.log('Successfully registered to global application commands.'))
-// 	.catch(console.error);
+rest.put(Routes.applicationCommands(clientId), { body: commands })
+	.then(() => console.log('Successfully registered to global application commands.'))
+	.catch(console.error);
 
 // Guild command
 // MAKE IT ACCEPT MULTIPLE GUILD IDS
-for(id of serverIds){
-	rest.put(Routes.applicationGuildCommands(clientId, id), { body: commands })
-	.then(() => console.log('Successfully registered to guild application commands.'))
-	.catch(console.error);
-}
+// for(id of serverIds){
+// 	rest.put(Routes.applicationGuildCommands(clientId, id), { body: commands })
+// 	.then(() => console.log('Successfully registered to guild application commands.'))
+// 	.catch(console.error);
+// }
